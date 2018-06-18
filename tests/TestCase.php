@@ -1,6 +1,7 @@
 <?php
 
 use Zaichaopan\Permission\RoleAndPermissionServiceProvider;
+use Zaichaopan\Permission\Models\Permission;
 
 abstract class TestCase extends Orchestra\Testbench\TestCase
 {
