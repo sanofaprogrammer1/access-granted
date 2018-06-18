@@ -4,7 +4,7 @@ namespace Zaichaopan\Permission;
 
 use Illuminate\Support\ServiceProvider;
 
-class PermissionServiceProvider extends ServiceProvider
+class RoleAndPermissionServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
