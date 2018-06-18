@@ -37,7 +37,7 @@ abstract class TestCase extends Orchestra\Testbench\TestCase
             'prefix' => '',
         ]);
 
-        \Schema::create('user', function ($table) {
+        \Schema::create('users', function ($table) {
             $table->increments('id');
             $table->string('email');
             $table->timestamps();

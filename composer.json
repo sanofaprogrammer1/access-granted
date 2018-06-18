@@ -22,9 +22,7 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php",
-            "tests/stubs/UserStub.php",
-            "tests/stubs/RoleStub.php",
-            "tests/stubs/PermissionStub.php"
+            "tests/stubs/User.php"
         ]
     }
 }
