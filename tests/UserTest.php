@@ -277,14 +277,14 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_can_check_if_user_has_permission_through_his_permissions()
+    public function it_can_check_if_user_has_permission_through_permission_trait()
     {
-        $this->assertFalse($this->user->hasPermission($this->readPermission->name));
+        $this->assertFalse($this->user->hasPermissionThroughPermissionTrait($this->readPermission->name));
         $this->user->givePermissionTo($this->readPermission->name);
         $this->user = $this->user->fresh();
 
-        $this->assertTrue($this->user->hasPermission($this->readPermission->name));
-        $this->assertFalse($this->user->hasPermission($this->writePermission->name));
+        $this->assertTrue($this->user->hasPermissionThroughPermissionTrait($this->readPermission->name));
+        $this->assertFalse($this->user->hasPermissionThroughPermissionTrait($this->writePermission->name));
     }
 
     /** @test */
@@ -296,5 +296,20 @@ class UserTest extends TestCase
         $this->user->giveRole($this->adminRole->name);
         $this->user = $this->user->fresh();
         $this->assertTrue($this->user->hasPermissionThroughRole($this->deletePermission->name));
+    }
+
+    /** @test */
+    public function it_can_check_if_user_has_permission()
+    {
+        $this->assertFalse($this->user->hasPermission($this->readPermission->name));
+        $this->user->givePermissionTo($this->readPermission->name);
+        $this->user = $this->user->fresh();
+        $this->assertTrue($this->user->hasPermission($this->readPermission->name));
+
+        $this->assertFalse($this->user->hasPermission($this->writePermission->name));
+        $this->userRole->givePermissionTo($this->writePermission->name);
+        $this->user->giveRole($this->userRole->name);
+        $this->user = $this->user->fresh();
+        $this->assertTrue($this->user->hasPermission($this->writePermission->name));
     }
 }

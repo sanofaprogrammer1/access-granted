@@ -5,9 +5,16 @@ use Zaichaopan\Permission\Traits\{HasPermissionsTrait, HasRolePermissionsTrait, 
 
 class User extends Model
 {
-    use HasPermissionsTrait, HasRolesTrait, HasRolePermissionsTrait;
+    use HasRolesTrait,
+        HasRolePermissionsTrait,
+        HasPermissionsTrait { hasPermission as hasPermissionThroughPermissionTrait; }
 
     protected $connection = 'testbench';
 
     protected $table = 'users';
+
+    public function hasPermission(string $permission)
+    {
+        return $this->hasPermissionThroughPermissionTrait($permission) || $this->hasPermissionThroughRole($permission);
+    }
 }
