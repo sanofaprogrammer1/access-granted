@@ -5,7 +5,7 @@ namespace Zaichaopan\Permission\Traits;
 use Zaichaopan\Permission\Models\Permission;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-trait HasPermissionsTrait
+trait HasPermissions
 {
     public function permissions(): BelongsToMany
     {

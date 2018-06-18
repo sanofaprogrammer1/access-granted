@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Database\Eloquent\Model;
-use Zaichaopan\Permission\Traits\{HasPermissionsTrait, HasRolePermissionsTrait, HasRolesTrait};
+use Zaichaopan\Permission\Traits\{HasPermissions, HasRolePermissions, HasRoles};
 
 class User extends Model
 {
-    use HasRolesTrait,
-        HasRolePermissionsTrait,
-        HasPermissionsTrait { hasPermission as hasPermissionThroughPermissionTrait; }
+    use HasRoles,
+        HasRolePermissions,
+        HasPermissions { hasPermission as hasPermissionThroughPermissionTrait; }
 
     protected $connection = 'testbench';
 

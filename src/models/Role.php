@@ -3,12 +3,12 @@
 namespace Zaichaopan\Permission\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Zaichaopan\Permission\Traits\HasPermissionsTrait;
+use Zaichaopan\Permission\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model
 {
-    use HasPermissionsTrait;
+    use HasPermissions;
 
     protected $guarded = [];
 

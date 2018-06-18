@@ -5,7 +5,7 @@ namespace Zaichaopan\Permission\Traits;
 use Zaichaopan\Permission\Models\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-trait HasRolesTrait
+trait HasRoles
 {
     public function roles() : BelongsToMany
     {

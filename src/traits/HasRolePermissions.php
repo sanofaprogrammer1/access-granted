@@ -2,7 +2,7 @@
 
 namespace Zaichaopan\Permission\Traits;
 
-trait HasRolePermissionsTrait
+trait HasRolePermissions
 {
     public function hasPermissionThroughRole(string $permission) : bool
     {
