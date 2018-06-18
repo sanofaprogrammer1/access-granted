@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Zaichaopan\Permission\Traits\{HasPermissions, HasRolePermissions, HasRoles};
 
-class User extends Model
+class User extends Model implements Authenticatable
 {
-    use HasRoles,
+    use AuthenticableTrait,
+        HasRoles,
         HasRolePermissions,
         HasPermissions { hasPermission as hasPermissionThroughPermissionTrait; }
 

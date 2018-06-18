@@ -37,6 +37,8 @@ abstract class TestCase extends Orchestra\Testbench\TestCase
             'prefix' => '',
         ]);
 
+        $app['config']->set('view.paths', [__DIR__ . '/stubs/resources/views']);
+
         \Schema::create('users', function ($table) {
             $table->increments('id');
             $table->string('email');
