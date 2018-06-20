@@ -2,13 +2,18 @@
     "name": "zaichaopan/access-granted",
     "description": "A Package to Add Role and Permission",
     "type": "library",
+    "keywords": [
+        "laravel",
+        "role",
+        "permission"
+    ],
     "autoload": {
         "psr-4": {
             "Zaichaopan\\AccessGranted\\": "src"
         }
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.1",
         "illuminate/support": "~5.5.0|~5.6.0"
     },
     "license": "MIT",
@@ -19,7 +24,8 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php",
-            "tests/stubs/User.php"
+            "tests/stubs/User.php",
+            "tests/HasPermissionsTraitTests.php"
         ]
     },
     "extra": {

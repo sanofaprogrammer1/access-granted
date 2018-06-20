@@ -5,6 +5,8 @@ use Zaichaopan\AccessGranted\Models\{Permission, Role};
 
 class UserTest extends TestCase
 {
+    use HasPermissionsTraitTests;
+
     public function setUp()
     {
         parent::setUp();
@@ -12,9 +14,6 @@ class UserTest extends TestCase
         $this->user = User::create([ 'email' => 'john@example.com' ]);
         $this->adminRole = Role::create(['name' => 'admin']);
         $this->userRole = Role::create(['name' => 'user']);
-        $this->readPermission = Permission::create(['name' => 'read']);
-        $this->writePermission = Permission::create(['name' => 'write']);
-        $this->deletePermission = Permission::create(['name' => 'delete']);
     }
 
     /** @test */
@@ -23,14 +22,6 @@ class UserTest extends TestCase
         $roles = $this->user->roles;
 
         $this->assertInstanceOf(Collection::class, $roles);
-    }
-
-    /** @test */
-    public function it_belongs_to_many_permissions()
-    {
-        $permissions = $this->user->permissions;
-
-        $this->assertInstanceOf(Collection::class, $permissions);
     }
 
     /** @test */
@@ -146,169 +137,44 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function it_can_give_user_a_invalid_permission()
-    {
-        $this->assertCount(0, $this->user->permissions);
-
-        $this->user->givePermissionTo('invalid permission');
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(0, $this->user->permissions);
-    }
-
-    /** @test */
-    public function it_can_give_user_a_valid_permission()
-    {
-        $this->assertCount(0, $this->user->permissions);
-
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(1, $permissions = $this->user->permissions);
-        $this->assertEquals($this->readPermission->id, $permissions->first()->id);
-    }
-
-    /** @test */
-    public function it_can_give_user_valid_permissions()
-    {
-        $this->assertCount(0, $this->user->permissions);
-
-        $this->user->givePermissionTo($this->readPermission->name, $this->writePermission->name, 'invalid permission');
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(2, $permissions = $this->user->permissions->pluck('id')->toArray());
-        $this->assertContains($this->readPermission->id, $permissions);
-        $this->assertContains($this->writePermission->id, $permissions);
-    }
-
-    /** @test */
-    public function a_valid_permission_can_not_be_given_twice()
-    {
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->assertCount(1, $this->user->permissions);
-
-        $this->user->givePermissionTo($this->readPermission->name, $this->writePermission->name);
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(2, $permissions = $this->user->permissions->pluck('id')->toArray());
-        $this->assertContains($this->readPermission->id, $permissions);
-        $this->assertContains($this->writePermission->id, $permissions);
-    }
-
-    /** @test */
-    public function it_cannot_withdraw_a_invalid_permission()
-    {
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->assertCount(1, $this->user->permissions);
-
-        $this->user->withdrawPermissionTo('invalid permission');
-
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(1, $permissions = $this->user->permissions);
-        $this->assertEquals($this->readPermission->id, $permissions->first()->id);
-    }
-
-    /** @test */
-    public function it_can_withdraw_a_valid_permission()
-    {
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->assertCount(1, $this->user->permissions);
-
-        $this->user->withdrawPermissionTo($this->readPermission->name, $this->writePermission->name, 'invalid');
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(0, $this->user->permissions);
-    }
-
-    /** @test */
-    public function it_can_withdraw_valid_permissions()
-    {
-        $this->user->givePermissionTo($this->readPermission->name, $this->writePermission->name, 'invalid permission');
-        $this->user->withdrawPermissionTo($this->readPermission->name, $this->writePermission->name, 'invalid');
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(0, $this->user->permissions);
-    }
-
-    /** @test */
-    public function it_can_withdraw_all_permissions()
-    {
-        $this->user->givePermissionTo($this->readPermission->name, $this->writePermission->name, 'invalid permission');
-        $this->user->withdrawAllPermissions();
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(0, $this->user->permissions);
-    }
-
-    /** @test */
-    public function it_cannot_update_invalid_permission()
-    {
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->user->updatePermission('invalid');
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(1, $permissions = $this->user->permissions);
-        $this->assertEquals($this->readPermission->id, $permissions = $this->user->permissions->first()->id);
-    }
-
-    /** @test */
-    public function it_can_update_a_valid_permission()
-    {
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->user->updatePermission($this->writePermission->name);
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(1, $permissions = $this->user->permissions);
-        $this->assertEquals($this->writePermission->id, $permissions = $this->user->permissions->first()->id);
-    }
-
-    /** @test */
-    public function it_can_update_valid_permissions()
-    {
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->user->updatePermission($this->writePermission->name, $this->deletePermission->name);
-        $this->user = $this->user->fresh();
-
-        $this->assertCount(2, $permissions = $this->user->permissions->pluck('id')->toArray());
-        $this->assertContains($this->writePermission->id, $permissions);
-        $this->assertContains($this->deletePermission->id, $permissions);
-    }
-
-    /** @test */
-    public function it_can_check_if_user_has_permission_through_permission_trait()
-    {
-        $this->assertFalse($this->user->hasPermissionThroughPermissionTrait($this->readPermission->name));
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->user = $this->user->fresh();
-
-        $this->assertTrue($this->user->hasPermissionThroughPermissionTrait($this->readPermission->name));
-        $this->assertFalse($this->user->hasPermissionThroughPermissionTrait($this->writePermission->name));
-    }
-
-    /** @test */
     public function it_can_check_if_user_has_permissions_through_his_roles()
     {
-        $this->assertFalse($this->user->hasPermissionThroughRole($this->deletePermission->name));
+        $readPermission = Permission::create(['name' => 'read']);
 
-        $this->adminRole->givePermissionTo($this->deletePermission->name);
-        $this->user->giveRole($this->adminRole->name);
+        $this->assertFalse($this->user->hasPermissionThroughRole($readPermission->name));
+
+        $this->userRole->givePermissionTo($readPermission->name);
+        $this->user->giveRole($this->userRole->name);
         $this->user = $this->user->fresh();
-        $this->assertTrue($this->user->hasPermissionThroughRole($this->deletePermission->name));
+
+        $this->assertTrue($this->user->hasPermissionThroughRole($readPermission->name));
     }
 
     /** @test */
     public function it_can_check_if_user_has_permission()
     {
-        $this->assertFalse($this->user->hasPermission($this->readPermission->name));
-        $this->user->givePermissionTo($this->readPermission->name);
-        $this->user = $this->user->fresh();
-        $this->assertTrue($this->user->hasPermission($this->readPermission->name));
+        $readPermission = Permission::create(['name' => 'read']);
+        $writePermission = Permission::create(['name' => 'write']);
 
-        $this->assertFalse($this->user->hasPermission($this->writePermission->name));
-        $this->userRole->givePermissionTo($this->writePermission->name);
+        $this->assertFalse($this->user->hasPermission($readPermission->name));
+        $this->user->givePermissionTo($readPermission->name);
+        $this->user = $this->user->fresh();
+        $this->assertTrue($this->user->hasPermission($readPermission->name));
+
+        $this->assertFalse($this->user->hasPermission($writePermission->name));
+        $this->userRole->givePermissionTo($writePermission->name);
         $this->user->giveRole($this->userRole->name);
         $this->user = $this->user->fresh();
-        $this->assertTrue($this->user->hasPermission($this->writePermission->name));
+        $this->assertTrue($this->user->hasPermission($writePermission->name));
+    }
+
+    protected function getModel()
+    {
+        return $this->user;
+    }
+
+    protected function getCheckPermissionMethodNameInHasPermissionsTrait()
+    {
+       return 'hasPermissionThroughPermissionTrait';
     }
 }
