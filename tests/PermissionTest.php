@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Collection;
-use Zaichaopan\Permission\Models\Permission;
+use Zaichaopan\AccessGranted\Models\Permission;
 
 class PermissionTest extends TestCase
 {

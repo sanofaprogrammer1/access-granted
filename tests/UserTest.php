@@ -1,8 +1,7 @@
 <?php
 
-use Zaichaopan\Permission\Models\Role;
 use Illuminate\Database\Eloquent\Collection;
-use Zaichaopan\Permission\Models\Permission;
+use Zaichaopan\AccessGranted\Models\{Permission, Role};
 
 class UserTest extends TestCase
 {

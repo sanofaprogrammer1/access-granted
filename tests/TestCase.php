@@ -1,13 +1,12 @@
 <?php
 
-use Zaichaopan\Permission\RoleAndPermissionServiceProvider;
-use Zaichaopan\Permission\Models\Permission;
+use Zaichaopan\AccessGranted\AccessGrantedServiceProvider;
 
 abstract class TestCase extends Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
     {
-        return [RoleAndPermissionServiceProvider::class];
+        return [AccessGrantedServiceProvider::class];
     }
 
     public function setUp()

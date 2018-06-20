@@ -1,6 +1,6 @@
 <?php
 
-namespace Zaichaopan\Permission\Traits;
+namespace Zaichaopan\AccessGranted\Traits;
 
 trait HasRolePermissions
 {

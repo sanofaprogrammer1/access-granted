@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Http\Request;
-use Zaichaopan\Permission\Models\Role;
-use Zaichaopan\Permission\Models\Permission;
-use Zaichaopan\Permission\Middlewares\PermissionMiddleware;
+use Zaichaopan\AccessGranted\Models\Role;
+use Zaichaopan\AccessGranted\Models\Permission;
+use Zaichaopan\AccessGranted\Middlewares\PermissionMiddleware;
 
 class PermissionMiddlewareTest extends TestCase
 {

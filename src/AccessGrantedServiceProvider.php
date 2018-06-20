@@ -1,13 +1,13 @@
 <?php
 
-namespace Zaichaopan\Permission;
+namespace Zaichaopan\AccessGranted;
 
 use Gate;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 
-class RoleAndPermissionServiceProvider extends ServiceProvider
+class AccessGrantedServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.

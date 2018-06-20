@@ -1,9 +1,9 @@
 <?php
 
-namespace Zaichaopan\Permission\Models;
+namespace Zaichaopan\AccessGranted\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Zaichaopan\Permission\Traits\HasPermissions;
+use Zaichaopan\AccessGranted\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model

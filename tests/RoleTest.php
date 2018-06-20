@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Collection;
-use Zaichaopan\Permission\Models\Role;
-use Zaichaopan\Permission\Models\Permission;
+use Zaichaopan\AccessGranted\Models\Role;
+use Zaichaopan\AccessGranted\Models\Permission;
 
 class RoleTest extends TestCase
 {

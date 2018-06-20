@@ -1,6 +1,6 @@
 <?php
 
-namespace Zaichaopan\Permission\Middlewares;
+namespace Zaichaopan\AccessGranted\Middlewares;
 
 use Closure;
 
@@ -11,7 +11,7 @@ class RoleMiddleware
         if (!$user = $request->user()) {
             return abort(401);
         }
-        
+
         if ($user->hasRole($role)) {
             return $next($request);
         }

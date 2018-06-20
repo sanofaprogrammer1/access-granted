@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use Zaichaopan\Permission\Models\Role;
-use Zaichaopan\Permission\Middlewares\RoleMiddleware;
+use Zaichaopan\AccessGranted\Models\Role;
+use Zaichaopan\AccessGranted\Middlewares\RoleMiddleware;
 
 class RoleMiddlewareTest extends TestCase
 {

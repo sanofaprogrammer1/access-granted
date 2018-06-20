@@ -1,6 +1,6 @@
 <?php
 
-use Zaichaopan\Permission\Models\{Permission, Role};
+use Zaichaopan\AccessGranted\Models\{Permission, Role};
 
 class BladeTest extends TestCase
 {

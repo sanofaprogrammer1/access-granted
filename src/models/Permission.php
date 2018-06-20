@@ -1,6 +1,6 @@
 <?php
 
-namespace Zaichaopan\Permission\Models;
+namespace Zaichaopan\AccessGranted\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

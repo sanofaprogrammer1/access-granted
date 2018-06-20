@@ -1,8 +1,8 @@
 <?php
 
-namespace Zaichaopan\Permission\Traits;
+namespace Zaichaopan\AccessGranted\Traits;
 
-use Zaichaopan\Permission\Models\Role;
+use Zaichaopan\AccessGranted\Models\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait HasRoles
