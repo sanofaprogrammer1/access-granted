@@ -16,7 +16,7 @@ class User extends Model implements Authenticatable
 
     protected $table = 'users';
 
-    public function hasPermission(string $permission)
+    public function hasPermission(string $permission): bool
     {
         return $this->hasPermissionThroughPermissionTrait($permission) || $this->hasPermissionThroughRole($permission);
     }

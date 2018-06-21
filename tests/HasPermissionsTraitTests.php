@@ -145,7 +145,7 @@ trait HasPermissionsTraitTests
         $this->assertCount(1, $permissions = $model->permissions);
         $this->assertEquals($readPermission->id, $permissions->first()->id);
 
-        $model->updatePermission('invalid');
+        $model->updatePermissionTo('invalid');
         $model = $model->fresh();
 
         $this->assertCount(1, $permissions = $model->permissions);
@@ -165,7 +165,7 @@ trait HasPermissionsTraitTests
         $this->assertCount(1, $permissions = $model->permissions);
         $this->assertEquals($readPermission->id, $permissions->first()->id);
 
-        $model->updatePermission($writePermission->name);
+        $model->updatePermissionTo($writePermission->name);
         $model = $model->fresh();
 
         $this->assertCount(1, $permissions = $model->permissions);
@@ -186,7 +186,7 @@ trait HasPermissionsTraitTests
         $this->assertCount(1, $permissions = $model->permissions);
         $this->assertEquals($readPermission->id, $permissions->first()->id);
 
-        $model->updatePermission($writePermission->name, $deletePermission->name);
+        $model->updatePermissionTo($writePermission->name, $deletePermission->name);
         $model = $model->fresh();
 
         $this->assertCount(2, $permissions = $model->permissions->pluck('id')->toArray());

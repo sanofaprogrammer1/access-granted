@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Zaichaopan\AccessGranted\Models\Role;
-use Zaichaopan\AccessGranted\Middlewares\RoleMiddleware;
+use Zaichaopan\AccessGranted\Middleware\RoleMiddleware;
 
 class RoleMiddlewareTest extends TestCase
 {

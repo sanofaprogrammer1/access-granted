@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Zaichaopan\AccessGranted\Models\Role;
 use Zaichaopan\AccessGranted\Models\Permission;
-use Zaichaopan\AccessGranted\Middlewares\PermissionMiddleware;
+use Zaichaopan\AccessGranted\Middleware\PermissionMiddleware;
 
 class PermissionMiddlewareTest extends TestCase
 {

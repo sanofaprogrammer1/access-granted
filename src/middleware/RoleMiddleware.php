@@ -1,6 +1,6 @@
 <?php
 
-namespace Zaichaopan\AccessGranted\Middlewares;
+namespace Zaichaopan\AccessGranted\Middleware;
 
 use Closure;
 

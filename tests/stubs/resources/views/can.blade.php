@@ -2,4 +2,4 @@
 has permission
 @else
  does not have permission
-@endrole
+@endcan

@@ -7,6 +7,13 @@
         "role",
         "permission"
     ],
+    "authors": [
+        {
+            "name": "zaichaopan",
+            "email": "zaichaopan@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Zaichaopan\\AccessGranted\\": "src"
@@ -34,6 +41,5 @@
                 "Zaichaopan\\AccessGranted\\AccessGrantedServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "stable"
+    }
 }

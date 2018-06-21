@@ -30,7 +30,7 @@ trait HasPermissions
         return true;
     }
 
-    public function updatePermission(string ...$permissionNames): bool
+    public function updatePermissionTo(string ...$permissionNames): bool
     {
         $permissions = Permission::whereIn('name', $permissionNames)->get();
 
