@@ -310,6 +310,8 @@ __Note__:
 If we call __hasPermission__ method, it can only check if the user has the permission through the permissions table. To avoid confusion, we can alias this method when using __hasPermissions__ trait and override the __hasPermission__ method to include check user's role permissions.
 
 ```php
+use Zaichaopan\AccessGranted\Traits\{HasPermissions, HasRolePermissions, HasRoles};
+
 class User extends Model
 {
     use HasRoles,
